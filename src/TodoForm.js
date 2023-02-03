@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function TodoForm({ todos, setTodos }) {
+export default function TodoForm({ todos, setTodos, setIsChecked, isChecked }) {
   const [taskInput, setTaskInput] = useState("");
   function addHandler(e) {
     e.preventDefault();
@@ -10,7 +10,7 @@ export default function TodoForm({ todos, setTodos }) {
 
     // appends a task object to an array and calls set todos from App.js
     setTodos([...newTodos, { task: taskInput, isDone: false }]);
-
+    setIsChecked([...isChecked, false]);
     //clears the input field
     e.target.reset();
   }

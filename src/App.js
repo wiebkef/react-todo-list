@@ -9,11 +9,22 @@ function App() {
     { task: "something else", isDone: false },
     { task: "important", isDone: false },
   ]);
+  const [isChecked, setIsChecked] = useState([false, false, false]);
 
   return (
     <div className="App">
-      <TodoForm todos={todos} setTodos={setTodos} />
-      <TodoList todos={todos} setTodos={setTodos} />
+      <TodoForm
+        todos={todos}
+        setTodos={setTodos}
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+      />
+      <TodoList
+        todos={todos}
+        setTodos={setTodos}
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+      />
     </div>
   );
 }

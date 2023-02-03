@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Todo({
   todos,
   todo,
-  done,
   deleteTask,
-  checkboxHandler,
+  checkTask,
   index,
   setTodos,
+  isChecked,
 }) {
   const [editing, setEditing] = useState(false);
-  const [editInput, setEditInput] = useState("");
+  const [editInput, setEditInput] = useState(todo.task);
 
   function editTask() {
     setEditing(true);
@@ -30,22 +30,25 @@ export default function Todo({
 
     setEditing(false);
   }
-  function changeInput(e) {
-    console.log(e.target.value);
-    setEditInput(e.target.value);
-  }
+
+  useEffect(() => {}, [editInput]);
 
   return (
     <li key={index}>
-      <input type="checkbox" onChange={() => checkboxHandler(index)} />
+      <input
+        type="checkbox"
+        checked={isChecked[index]}
+        onChange={() => checkTask(index)}
+      />
       {!editing && todo.task}
       {!editing && <button onClick={editTask}>edit</button>}
       {editing && (
         <form onSubmit={(e) => saveTask(e, index)}>
           <input
             type="text"
-            onChange={changeInput}
+            onChange={(e) => setEditInput(e.target.value)}
             onBlur={(e) => saveTask(e, index)}
+            value={editInput}
           ></input>
           <button>save</button>
         </form>
